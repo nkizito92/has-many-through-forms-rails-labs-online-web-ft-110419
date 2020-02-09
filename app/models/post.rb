@@ -5,17 +5,10 @@ class Post < ActiveRecord::Base
   has_many :users, through: :comments
   accepts_nested_attributes_for :categories, reject_if: :all_blank
 
-  # def categories_attributes=(category_attributes)
-  #   categories_attributes.values.each do |cat_att|
-  #     category = Category.find_or_create_by(cat_att)
-  #     self.categories << category
-  #   end 
-  # end 
-
   def comments_attributes=(comment_attributes)
     comment_attributes.values.each do |comment_attribute|
       comment = Comment.find_or_create_by(comment_attribute)
-      self.comment_attributes.build(comment: comment)
+      self.comments << comment
     end
   end
 
